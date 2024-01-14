@@ -14,7 +14,7 @@ install apache
 
 <code>sudo ufw app list</code>
 
-<code>sudo ufw allow in "Apache"<code>
+<code>sudo ufw allow in "Apache"</code>
 
 <code>sudo ufw status</code>
 
