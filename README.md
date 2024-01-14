@@ -1,9 +1,9 @@
-# apache-serever
+# Server Setup -  Lamp Installation
 
 **Step 1 — Installing Apache and Updating the Firewall**
 
-# Update the sysyem
-sudo apt update
+Update the sysyem
+<code>sudo apt update</code>
 
 # install apache
 sudo apt install apache2
