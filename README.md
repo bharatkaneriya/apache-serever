@@ -7,6 +7,7 @@ Update the system
 <code>sudo apt update</code>
 
 install apache
+
 <code>sudo apt install apache2</code>
 
 <code>sudo systemctl status apache2</code>
@@ -65,52 +66,64 @@ install default packages
 
 <code>sudo nano /etc/mysql/my.cnf</code>
 
+<code>
 [mysqld]
 sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+</code>code>
+
+<code>sudo systemctl start mysql.service</code>
+
+<code>sudo mysql_secure_installation</code> 
+
+<code>sudo mysql</code>
+
+<code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password';</code>
+
+<code>exit</code>
+
+**Step 4 — Installing PHPMyAdmin**
+
+<code>sudo apt install phpmyadmin</code>
+
+<code>sudo phpenmod mbstring</code>
+
+<code>sudo service apache2 restart</code>
+
+<code>sudo nano /etc/apache2/apache2.conf</code>
+
+Add code below to apache2.conf for include phpmyadmin
+
+<code>Include /etc/phpmyadmin/apache.conf</code>
+
+<code>sudo service apache2 restart</code>
 
 
+**Step 5 — Setup the permission group**
 
-sudo systemctl start mysql.service
+Set group to www-data
 
-sudo mysql_secure_installation 
+<code>sudo chgrp www-data /var/www/html</code>
 
-sudo mysql
+Make it writable for the group
 
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'OAtEtime';
+<code>sudo chmod 775 /var/www/html</code>
 
-exit
+Set GID to www-data for all sub-folders
 
-Step 4 — Installing PHPMyAdmin
+<code>sudo chmod g+s /var/www/html</code>
 
-sudo apt install phpmyadmin
+Add your username to www-data group
 
-sudo phpenmod mbstring
+<code>sudo usermod -a -G www-data ubuntu</code>
 
-sudo service apache2 restart
+Finally, change ownership to 
+
+<code>sudo chown ubuntu /var/www/html</code>
 
 
-sudo nano /etc/apache2/apache2.conf
+**Step 6 — How To Add Swap Space**
 
-Include /etc/phpmyadmin/apache.conf
-
-sudo service apache2 restart
-
-Step 5 — Setup the permission group
-
-# Set group to www-data
-sudo chgrp www-data /var/www/html
-# Make it writable for the group
-sudo chmod 775 /var/www/html
-# Set GID to www-data for all sub-folders
-sudo chmod g+s /var/www/html
-# Add your username to www-data group
-sudo usermod -a -G www-data ubuntu
-# Finally change ownership to 
-sudo chown ubuntu /var/www/html
-# Your account shouldn't have any more permission issues
-
-Step 6 — How To Add Swap Space
-
+<code>
 sudo fallocate -l 2G /swapfile
 ls -lh /swapfile
 sudo chmod 600 /swapfile
@@ -118,44 +131,13 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+</code>
 
 
+**Step 7 — Install Composer**
 
-Step 7 — Install Composer
-
+<code>
 cd ~
 curl -sS https://getcomposer.org/installer | sudo php
 sudo mv composer.phar /usr/local/bin/composer
-
-
-
-Setup VirtualHost 
-
-sudo nano /etc/apache2/sites-available/your-domain.conf
-
-#Add the following content:
-
-<VirtualHost *:80>
-
-ServerAdmin webmaster@your-domain.com
-
-ServerName your-domain.com
-ServerAlias www.your-domain.com
-DocumentRoot /var/www/html/
-
-<Directory /var/www/html/>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-</Directory>
-
-ErrorLog ${APACHE_LOG_DIR}/your-domain.com_error.log
-CustomLog ${APACHE_LOG_DIR}/your-domain.com_access.log combined
-
-</VirtualHost>
-
-#Enable the Apache virtual host:
-sudo a2ensite your-domain.conf
-
-#After that, restart the Apache web server
-sudo service apache2 restart
+</code>
