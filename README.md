@@ -25,7 +25,7 @@ Enable Mod-Rewrite
 
 <code>sudo a2enmod rewrite</code>
 
-<code>sudo service apache2 restart<code>
+<code>sudo service apache2 restart</code>
 
 Enabling .htaccess file to rewrite path
 
