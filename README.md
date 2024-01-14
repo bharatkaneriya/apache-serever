@@ -2,7 +2,8 @@
 
 **Step 1 — Installing Apache and Updating the Firewall**
 
-Update the sysyem
+Update the system
+
 <code>sudo apt update</code>
 
 # install apache
