@@ -4,126 +4,193 @@
 
 Update the system
 
-<code>sudo apt update</code>
+```
+sudo apt update
+```
 
 install apache
 
-<code>sudo apt install apache2</code>
+```
+sudo apt install apache2
+```
 
-<code>sudo systemctl status apache2</code>
+```
+sudo systemctl status apache2
+```
 
-<code>sudo ufw app list</code>
+```
+sudo ufw app list
+```
 
-<code>sudo ufw allow in "Apache"</code>
+```
+sudo ufw allow in "Apache"
+```
 
-<code>sudo ufw status</code>
+```
+sudo ufw status
+```
 
 Open the link below in your browser to test your installation
 http://your_server_ip
 
 Enable Mod-Rewrite
 
-<code>sudo a2enmod rewrite</code>
+```
+sudo a2enmod rewrite
+```
 
-<code>sudo service apache2 restart</code>
+```
+sudo service apache2 restart
+```
 
 Enabling .htaccess file to rewrite path
 
 Open apache2.conf and change AllowOverride None change None to All
 
-<code>sudo nano /etc/apache2/apache2.conf</code>
+```
+sudo nano /etc/apache2/apache2.conf
+```
 
-<code>
+```
 <Directory /var/www/>
     Options Indexes FollowSymLinks
     AllowOverride All
     Require all granted
 </Directory>
-</code>
+```
 
-<code>sudo service apache2 restart</code>
+```
+sudo service apache2 restart
+```
 
 
  
 **Step 2 — Installing PHP**
 
-<code>sudo apt install --no-install-recommends php8.1</code>
+```
+sudo apt install --no-install-recommends php8.1
+```
 
 To test installation run below command in your terminal.
 
-<code>php -v</code>
+```
+php -v
+```
 
 install default packages
 
-<code>sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath</code>
+```
+sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
+```
 
-<code>sudo service apache2 restart</code>
+```
+sudo service apache2 restart
+```
 
 
 **Step 3 — Installing MySQL**
 
-<code>sudo apt install mysql-server</code>
+```
+sudo apt install mysql-server
+```
 
-<code>sudo nano /etc/mysql/my.cnf</code>
+```
+sudo nano /etc/mysql/my.cnf
+```
 
-<code>
+```
+
 [mysqld]
 sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
-</code>code>
 
-<code>sudo systemctl start mysql.service</code>
+```code>
 
-<code>sudo mysql_secure_installation</code> 
+```
+sudo systemctl start mysql.service
+```
 
-<code>sudo mysql</code>
+```
+sudo mysql_secure_installation
+``` 
 
-<code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password';</code>
+```
+sudo mysql
+```
 
-<code>exit</code>
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password';
+```
+
+```
+exit
+```
 
 **Step 4 — Installing PHPMyAdmin**
 
-<code>sudo apt install phpmyadmin</code>
+```
+sudo apt install phpmyadmin
+```
 
-<code>sudo phpenmod mbstring</code>
+```
+sudo phpenmod mbstring
+```
 
-<code>sudo service apache2 restart</code>
+```
+sudo service apache2 restart
+```
 
-<code>sudo nano /etc/apache2/apache2.conf</code>
+```
+sudo nano /etc/apache2/apache2.conf
+```
 
 Add code below to apache2.conf for include phpmyadmin
 
-<code>Include /etc/phpmyadmin/apache.conf</code>
+```
+Include /etc/phpmyadmin/apache.conf
+```
 
-<code>sudo service apache2 restart</code>
+```
+sudo service apache2 restart
+```
 
 
 **Step 5 — Setup the permission group**
 
 Set group to www-data
 
-<code>sudo chgrp www-data /var/www/html</code>
+```
+sudo chgrp www-data /var/www/html
+```
 
 Make it writable for the group
 
-<code>sudo chmod 775 /var/www/html</code>
+```
+sudo chmod 775 /var/www/html
+```
 
 Set GID to www-data for all sub-folders
 
-<code>sudo chmod g+s /var/www/html</code>
+```
+sudo chmod g+s /var/www/html
+```
 
 Add your username to www-data group
 
-<code>sudo usermod -a -G www-data ubuntu</code>
+```
+sudo usermod -a -G www-data ubuntu
+```
 
 Finally, change ownership to 
 
-<code>sudo chown ubuntu /var/www/html</code>
+```
+sudo chown ubuntu /var/www/html
+```
 
 
 **Step 6 — How To Add Swap Space**
 
-<code>
+```
+
 sudo fallocate -l 2G /swapfile
 ls -lh /swapfile
 sudo chmod 600 /swapfile
@@ -131,13 +198,14 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-</code>
+
+```
 
 
 **Step 7 — Install Composer**
 
-<code>
+```
 cd ~
 curl -sS https://getcomposer.org/installer | sudo php
 sudo mv composer.phar /usr/local/bin/composer
-</code>
+```
