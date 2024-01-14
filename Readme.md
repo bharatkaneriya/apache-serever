@@ -1,6 +1,6 @@
 # Server Setup -  Lamp Installation
 
-**Step 1 — Installing Apache and Updating the Firewall**
+## Step 1 — Installing Apache and Updating the Firewall
 
 Update the system
 
@@ -65,7 +65,7 @@ sudo service apache2 restart
 
 
  
-**Step 2 — Installing PHP**
+## Step 2 — Installing PHP
 
 ```
 sudo apt install --no-install-recommends php8.1
@@ -88,7 +88,7 @@ sudo service apache2 restart
 ```
 
 
-**Step 3 — Installing MySQL**
+## Step 3 — Installing MySQL
 
 ```
 sudo apt install mysql-server
@@ -103,7 +103,7 @@ sudo nano /etc/mysql/my.cnf
 [mysqld]
 sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
 
-```code>
+```
 
 ```
 sudo systemctl start mysql.service
@@ -125,7 +125,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password
 exit
 ```
 
-**Step 4 — Installing PHPMyAdmin**
+## Step 4 — Installing PHPMyAdmin
 
 ```
 sudo apt install phpmyadmin
@@ -154,7 +154,7 @@ sudo service apache2 restart
 ```
 
 
-**Step 5 — Setup the permission group**
+## Step 5 — Setup the permission group
 
 Set group to www-data
 
@@ -187,7 +187,7 @@ sudo chown ubuntu /var/www/html
 ```
 
 
-**Step 6 — How To Add Swap Space**
+## Step 6 — How To Add Swap Space
 
 ```
 
@@ -202,7 +202,7 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
 
-**Step 7 — Install Composer**
+## Step 7 — Install Composer
 
 ```
 cd ~
