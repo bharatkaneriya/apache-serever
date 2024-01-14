@@ -6,56 +6,65 @@ Update the system
 
 <code>sudo apt update</code>
 
-# install apache
-sudo apt install apache2
+install apache
+<code>sudo apt install apache2</code>
 
-sudo systemctl status apache2
+<code>sudo systemctl status apache2</code>
 
-sudo ufw app list
+<code>sudo ufw app list</code>
 
-sudo ufw allow in "Apache"
+<code>sudo ufw allow in "Apache"<code>
 
-sudo ufw status
+<code>sudo ufw status</code>
 
+Open the link below in your browser to test your installation
 http://your_server_ip
 
 Enable Mod-Rewrite
-# enable rewrite
-sudo a2enmod rewrite
-# restart apache
-sudo service apache2 restart
 
-# Enabling .htaccess file to rewrite path
-sudo nano /etc/apache2/apache2.conf
-#AllowOverride None change None to All
+<code>sudo a2enmod rewrite</code>
 
+<code>sudo service apache2 restart<code>
+
+Enabling .htaccess file to rewrite path
+
+Open apache2.conf and change AllowOverride None change None to All
+
+<code>sudo nano /etc/apache2/apache2.conf</code>
+
+<code>
 <Directory /var/www/>
     Options Indexes FollowSymLinks
     AllowOverride All
     Require all granted
 </Directory>
+</code>
 
-sudo service apache2 restart
+<code>sudo service apache2 restart</code>
 
 
  
 **Step 2 — Installing PHP**
 
-sudo apt install --no-install-recommends php8.1
+<code>sudo apt install --no-install-recommends php8.1</code>
 
-php -v
+To test installation run below command in your terminal.
 
-#install default packages
-sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
+<code>php -v</code>
 
-sudo service apache2 restart
+install default packages
+
+<code>sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath</code>
+
+<code>sudo service apache2 restart</code>
 
 
-Step 3 — Installing MySQL
+**Step 3 — Installing MySQL**
 
-sudo apt install mysql-server
+<code>sudo apt install mysql-server</code>
 
-sudo nano /etc/mysql/my.cnf
+<code>sudo nano /etc/mysql/my.cnf</code>
+
 [mysqld]
 sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
 
